@@ -69,7 +69,7 @@ input[type=submit]:hover {
 }
 
 
-.labels:after{
+.labels:{
     content: "";
     display: table;
     clear: both;
