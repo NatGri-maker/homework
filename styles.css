@@ -1,6 +1,7 @@
-*{box-sizing: border-box;
+body
+{box-sizing: border-box;
 }
-input[type=text], input[type=email], input[type=number], input[type=select], input[type=date],input[type=select],input[type=password], input[type=tel]
+input[type=text], input[type=email], input[type=number], input[type=date],input[type=select],input[type=password], input[type=tel]
 {
     width: 30%;
     padding: 15px;
