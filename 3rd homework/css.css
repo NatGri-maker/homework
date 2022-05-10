@@ -4,7 +4,6 @@
     -webkit-border-top-right-radius:15px;
 }
 h1 {color: white;
-    font-size:70pt;
     font-weight:bold;
     font-style:italic;
 }
@@ -29,7 +28,8 @@ h1 {color: white;
     color: red;
 }
 @media only screen and (max-width: 620px) {
-    .list-group, .m-3{
-        float:left;
+    .list-group, .m-3 {
+        float: left;
         width: 100%;
     }
+}
