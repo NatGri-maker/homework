@@ -1,8 +1,8 @@
-function MyFunction(N,M){
+function Maximum(N,M){
     if(N===M) return "equals";
     else if(N>M) return N;
     else if(M>N) return M;
 }
-console.log(MyFunction());
-MyFunction(6,6);
+console.log(Maximum());
+Maximum(9,6);
 

@@ -27,3 +27,4 @@ const rectangles = [{
 for(let rectangle of rectangles){
     console.log(rectangle.id+":"+ rectangle.width*rectangle.height);
 };
+
