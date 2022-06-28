@@ -5,6 +5,4 @@ const currentDate= setInterval(()=>{
     if (repeat===10) {
         clearInterval(currentDate);
     }
-        ++repeat;
-
-})
+        ++repeat}
