@@ -13,7 +13,7 @@ function GalleryView() {
             {
                 albums.map((album) =>(
                     <Col sm={3} key={album.id}>
-                        <Card className="h-100" style={{minHeight:120}}>
+                        <Card className="h-100 album-card" style={{minHeight:120}}>
                             <Card.Body>
                                 {album.title}
                             </Card.Body>

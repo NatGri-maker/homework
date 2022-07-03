@@ -1,4 +1,4 @@
-/*import GalleryView from "./gallery/GalleryView";
+import GalleryView from "./gallery/GalleryView";
 
 function App (){
     return(
@@ -10,9 +10,9 @@ function App (){
 }
 export default App;
 
-*/
 
-import Timer from './timer/Timer'
+
+/*import Timer from './timer/Timer'
 
 function App (){
     return(
