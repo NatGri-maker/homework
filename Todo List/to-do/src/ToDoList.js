@@ -1,12 +1,14 @@
-import {Button, Container, Form, FormControl, InputGroup, ListGroup} from "react-bootstrap";
+import {Button, Container, Form, FormControl, InputGroup, ListGroup, Spinner} from "react-bootstrap";
 import {AiOutlinePlus as PlusIcon} from "react-icons/ai";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import {FaRegEdit as EditIcon, FaWindowClose as DeleteIcon} from 'react-icons/fa';
+import LoadingContext from "./LoadingContext";
 
 export default function ToDoList() {
     const [newTask, setNewTasks] = useState('');
     const [tasks, setTasks] = useState([]);
+    const {loading, setLoading} = useContext(LoadingContext)
 
     useEffect(() => {
         loadTasks();
@@ -24,12 +26,16 @@ export default function ToDoList() {
                 "done": false
             });
             setNewTasks('')
+            await loadTasks()
         }
     }
-    const loadTasks = () => {
-        axios.get('http://localhost:3030/todos/').then((response) => {
-            setTasks(response.data)
-        })
+    const loadTasks = async () => {
+        setLoading(true);
+       const response= await axios.get('http://localhost:3030/todos/')
+        const resolved=response.data.filter((task)=>task.done)
+        const notResolved=response.data.filter((task)=>!task.done)
+        setTasks([...notResolved,...resolved])
+        setLoading(false);
     }
     const checkedTask = (id) => async (event) => {
         const task = tasks.find((task) => task.id === id);
@@ -54,45 +60,53 @@ export default function ToDoList() {
     }
     return (
         <Container className="mt-4">
-            <Form>
-                <InputGroup className="mb-3">
-                    <FormControl
-                        placeholder="add task"
-                        value={newTask}
-                        onChange={handleChange}
-                    />
+            {
+                loading ? (<Spinner animation="border"/>)
+                    : (
+                        <div>
+                            <Form>
+                                <InputGroup className="mb-3">
+                                    <FormControl
+                                        placeholder="add task"
+                                        value={newTask}
+                                        onChange={handleChange}
+                                    />
 
-                    <Button variant="outline-secondary" type="button" onClick={addTaskToList}><PlusIcon/></Button>
-                </InputGroup>
-            </Form>
-            <ListGroup>
-                {
-                    tasks.map((task) => (
-                        <ListGroup.Item key={task.id} className={"d-flex"}>
-                            <Form.Check className={"me-3"}
-                                        type="checkbox"
-                                        checked={task.done}
-                                        onChange={checkedTask(task.id)}
-                            />
-                            <div className={"flex-fill"}>
+                                    <Button variant="outline-secondary" type="button"
+                                            onClick={addTaskToList}><PlusIcon/></Button>
+                                </InputGroup>
+                            </Form>
+                            <ListGroup>
                                 {
-                                    task.done ? (<del>{task.text}</del>) : (<div>{task.text}</div>)
+                                    tasks.map((task) => (
+                                        <ListGroup.Item key={task.id} className={"d-flex"}>
+                                            <Form.Check className={"me-3"}
+                                                        type="checkbox"
+                                                        checked={task.done}
+                                                        onChange={checkedTask(task.id)}
+                                            />
+                                            <div className={"flex-fill"}>
+                                                {
+                                                    task.done ? (<del>{task.text}</del>) : (<div>{task.text}</div>)
+                                                }
+                                            </div>
+                                            <Button variant="outline-secondary" type="button" className={"me-2"}
+                                                    onClick={() => {
+                                                        editTask(task.id)
+                                                    }}><EditIcon/></Button>
+                                            <Button variant="outline-secondary" type={"button"} onClick={() => {
+                                                deleteTask(task.id)
+                                            }}><DeleteIcon/></Button>
+                                        </ListGroup.Item>
+                                    ))
+
                                 }
-                            </div>
-                            <Button variant="outline-secondary" type="button" className={"me-2"}
-                                    onClick={() => {
-                                        editTask(task.id)
-                                    }}><EditIcon/></Button>
-                            <Button variant="outline-secondary" type={"button"} onClick={() => {
-                                deleteTask(task.id)
-                            }}><DeleteIcon/></Button>
-                        </ListGroup.Item>
-                    ))
-
-                }
 
 
-            </ListGroup>
+                            </ListGroup>
+                        </div>
+                    )
+            }
         </Container>
     );
 }
