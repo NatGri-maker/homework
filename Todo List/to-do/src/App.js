@@ -1,19 +1,26 @@
-import {BrowserRouter} from "react-router-dom";
-import {Route, Routes} from "react-router";
 import ToDoList from "./ToDoList";
 import LoadingContext from "./LoadingContext";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import LogInPage from "./LogInPage";
+import axios from "axios";
 
 function App() {
-  const[loading, setLoading]=useState(false);
+
+    const [user, setUser] = useState(null);
+
+    useEffect(()=>{
+        const token =localStorage.getItem('token');
+        if(token)
+            axios.get('http://localhost:3030/user',{
+                headers:{
+                    "Authorization":token
+                }
+            }).then((response)=>setUser(response.data))
+
+    },
+        [])
     return (
-        <LoadingContext.Provider value={{loading,setLoading}}>
-            <BrowserRouter>
-                <Routes>
-                    <Route path={"/"} element={<ToDoList/>}></Route>
-                </Routes>
-            </BrowserRouter>
-        </LoadingContext.Provider>
+        user ? <ToDoList/> : <LogInPage/>
     );
 }
 
