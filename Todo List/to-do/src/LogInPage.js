@@ -9,7 +9,8 @@ export default function LogInPage() {
 
     const login = async (event) => {
         event.preventDefault();
-        const response = await axios.post('http://localhost:3030/login', {username, password});
+        const response = await axios.post('http://localhost:3030/login', {username, password})
+            .catch((error)=>{console.error(error, 'user name or password is not correct')});
         localStorage.setItem('token', response.data.token);
         window.location.reload();
 
@@ -21,14 +22,14 @@ export default function LogInPage() {
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>User name</Form.Label>
                     <Form.Control placeholder="Enter user name"
-                                  on onChange={(event) => setUserName(event.target.value)}/>
+                                  onChange={(event) => setUserName(event.target.value)}/>
 
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Password"
-                                  on onChange={(event) => setPassword(event.target.value)}/>
+                                   onChange={(event) => setPassword(event.target.value)}/>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
 
