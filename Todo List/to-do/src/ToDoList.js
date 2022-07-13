@@ -13,7 +13,8 @@ export default function ToDoList() {
     const {theme} = useContext(ThemeContext);
 
     useEffect(() => {
-        loadTasks();
+        loadTasks().catch(console.error)
+
     }, [])
 
     const handleChange = (event) => {
@@ -103,10 +104,10 @@ export default function ToDoList() {
                                                 </div>
                                                 <Button variant="outline-secondary" type="button" className={"me-2"}
                                                         onClick={() => {
-                                                            editTask(task.id)
+                                                            editTask(task.id).catch(console.error)
                                                         }}><EditIcon/></Button>
                                                 <Button variant="outline-secondary" type={"button"} onClick={() => {
-                                                    deleteTask(task.id)
+                                                    deleteTask(task.id).catch(console.error)
                                                 }}><DeleteIcon/></Button>
                                             </ListGroup.Item>
                                         ))
