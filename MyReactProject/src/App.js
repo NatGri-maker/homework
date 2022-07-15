@@ -5,6 +5,7 @@ import {Routes, Route, Outlet} from "react-router";
 import Layout from "./Layout";
 import {Alert} from "react-bootstrap";
 import UsersTable from "./users/UsersTable";
+import UsersView from "./users/UsersView";
 
 function App() {
     return (
@@ -19,7 +20,7 @@ function App() {
                     </Route>
                     <Route path={"timer2"} element={<Timer initialTime={30}></Timer>}></Route>
                     <Route path={"users"} element={<UserList/>}></Route>
-                    <Route path={"users2"} element={<UsersTable/>}></Route>
+                    <Route path={"usersView"} element={<UsersView/>}></Route>
                     <Route path={"*"} element={<Alert variant={"danger"}>Page Not Found</Alert>}/>
                 </Route>
             </Routes>

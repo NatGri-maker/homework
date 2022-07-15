@@ -11,7 +11,7 @@ export default function Header(){
                     <Nav.Link as={Link} to="/timer/1">Timer 1</Nav.Link>
                     <Nav.Link as={Link} to="/timer2">Timer 2</Nav.Link>
                     <Nav.Link as={Link} to="/users">Users</Nav.Link>
-                    <Nav.Link as={Link} to="/users2">Users Table</Nav.Link>
+                    <Nav.Link as={Link} to="/usersView">Users View</Nav.Link>
                 </Nav>
             </Container>
         </Navbar>
