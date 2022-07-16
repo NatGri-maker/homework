@@ -12,6 +12,7 @@ export default function Header(){
                     <Nav.Link as={Link} to="/timer2">Timer 2</Nav.Link>
                     <Nav.Link as={Link} to="/users">Users</Nav.Link>
                     <Nav.Link as={Link} to="/usersView">Users View</Nav.Link>
+                    <Nav.Link as={Link} to="/fancy-border">Fancy Border</Nav.Link>
                 </Nav>
             </Container>
         </Navbar>

@@ -1,30 +1,32 @@
 import {Button, Col, Form, Row} from "react-bootstrap";
 import {useState} from "react";
-import axios from "axios";
 
-export default function SearchForm() {
-    const initialValues={
+export default function SearchForm({onSearch}) {
+    const initialValues = {
         name: '',
         email: '',
         username: '',
         city: '',
     }
-
     const [values, setValues] = useState(initialValues);
 
     const search = async (event) => {
         event.preventDefault();
-        console.log(values);
-        const response = await axios.get('https://jsonplaceholder.typicode.com/users', {
-            params: values
-        });
-        console.log(response.data)
+        let params = {};
+        for (let key in values) {
+            if (values[key]) {
+                params[key] = values[key]
+            }
+        }
+        if (typeof onSearch === 'function') {
+            await onSearch(params);
+        }
     }
+
     const reset = () => setValues(initialValues);
 
     const handleChange = (event) => {
         setValues({...values, [event.target.name]: event.target.value})
-
     }
 
     return (
