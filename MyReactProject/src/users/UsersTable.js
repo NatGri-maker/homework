@@ -1,6 +1,4 @@
 import {Table} from "react-bootstrap";
-import {useEffect, useState} from "react";
-import axios from "axios";
 
 export default function UsersTable({data = []}) {
 
