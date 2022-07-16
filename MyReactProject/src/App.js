@@ -4,7 +4,6 @@ import {BrowserRouter} from "react-router-dom";
 import {Routes, Route, Outlet} from "react-router";
 import Layout from "./Layout";
 import {Alert} from "react-bootstrap";
-import UsersTable from "./users/UsersTable";
 import UsersView from "./users/UsersView";
 
 function App() {
