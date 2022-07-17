@@ -51,12 +51,12 @@ export default function ChatModal(props) {
                     {
                         messages.map((message) => (
                             message.sender === props.user.username ?
-                                <Alert key={message.time} variant={"secondary"}>
+                                <Alert key={message.time} variant={"secondary"} className={"me-5"}>
                                     {message.time}
                                     {message.text}
                                 </Alert>
                                 :
-                                <Alert key={message.time} variant={"primary"}>
+                                <Alert key={message.time} variant={"primary"} className={"ms-5"}>
                                     {message.time}
                                     {message.text}
                                 </Alert>
